@@ -30,6 +30,8 @@ console.log(PORT);
 //cors
 //enable cors npm install cors
 
+// require in routes file const knex = require('knex')(require('../knexfile'));
+
 const inventoryRoutes = require('./routes/inventory.js')
 const warehouseRoutes = require('./routes/warehouse.js')
 
