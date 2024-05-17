@@ -1,9 +1,8 @@
 const express = require('express')
 const router = express.Router();
 // app.use(express.json());
+const {getAllInventories} = require('./controllers/inventory-controller')
 
-router.get('/', (req, res) => {
-  console.log("inventory route")
-})
+router.get('/', getAllInventories);
 
 module.exports = router
