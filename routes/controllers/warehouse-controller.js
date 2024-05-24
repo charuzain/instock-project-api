@@ -1,7 +1,8 @@
 const express = require('express');
+const app = express();
 const knex = require('knex')(require('../../knexfile'));
 
-const getAllWarehouses = async () => {
+const getAllWarehouses = async (req,res) => {
   try {
     const warehouses = await knex('warehouses');
     res.status(200).json(warehouses)
@@ -10,5 +11,8 @@ const getAllWarehouses = async () => {
   }
 };
 
+const getWareHouseDetailById = () => {
+  
+}
 
 module.exports = {getAllWarehouses}
