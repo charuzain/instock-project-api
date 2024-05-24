@@ -6,7 +6,10 @@
 const express = require('express');
 const knex = require('knex')(require('../knexfile'));
 const router = express.Router();
-const {getAllWarehouses} = require('./controllers/warehouse-controller')
+const {
+  getAllWarehouses,
+  getWareHouseDetailById,
+} = require('./controllers/warehouse-controller');
 // app.use(express.json());
 
 // const getAllWarehouses = async() => {
@@ -19,6 +22,6 @@ const {getAllWarehouses} = require('./controllers/warehouse-controller')
 // }
 
 router.get('/', getAllWarehouses)
-
+router.get('/:id', getWareHouseDetailById);
 
 module.exports = router;
