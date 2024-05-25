@@ -22,9 +22,11 @@ const getWareHouseDetailById = async (req, res) => {
         'country',
         'contact_position',
         'contact_phone',
-        'contact_email'
+        'contact_email',
+        'contact_name'
       )
-      .where({ id: req.params.id });
+      .where({ id: req.params.id })
+      .first();
     console.log(warehouse);
     if (warehouse.length === 0) {
       res.status(404).send('No warehouse found');
