@@ -56,8 +56,14 @@ const getInventoriesForWarehouse = async (req, res) => {
   }
 };
 
+const addNewWarehouse = async (req, res) => {
+  console.log("post request")
+  console.log(req.body)
+}
+
 module.exports = {
   getAllWarehouses,
   getWareHouseDetailById,
   getInventoriesForWarehouse,
+  addNewWarehouse
 };
