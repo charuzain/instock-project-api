@@ -13,12 +13,14 @@ const {
   getInventoriesForWarehouse,
   addNewWarehouse,
   updateWarehouse,
+  deleteWarehouse,
 } = require('../controllers/warehouse-controller');
 
 router.get('/', getAllWarehouses)
 router.post('/', addNewWarehouse);
 router.patch('/:id', updateWarehouse);
 router.get('/:id', getWareHouseDetailById);
+router.delete('/id', deleteWarehouse);
 router.get('/:id/inventories' , getInventoriesForWarehouse)
 
 module.exports = router;
