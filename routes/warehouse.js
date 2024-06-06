@@ -12,10 +12,12 @@ const {
   getWareHouseDetailById,
   getInventoriesForWarehouse,
   addNewWarehouse,
+  updateWarehouse,
 } = require('../controllers/warehouse-controller');
 
 router.get('/', getAllWarehouses)
 router.post('/', addNewWarehouse);
+router.patch('/:id', updateWarehouse);
 router.get('/:id', getWareHouseDetailById);
 router.get('/:id/inventories' , getInventoriesForWarehouse)
 

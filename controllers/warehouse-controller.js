@@ -57,13 +57,76 @@ const getInventoriesForWarehouse = async (req, res) => {
 };
 
 const addNewWarehouse = async (req, res) => {
-  console.log("post request")
-  console.log(req.body)
-}
+  console.log(req.body);
+  if (
+    !req.body.warehouse_name ||
+    !req.body.address ||
+    !req.body.city ||
+    !req.body.country ||
+    !req.body.contact_name ||
+    !req.body.contact_phone ||
+    !req.body.contact_email ||
+    !req.body.contact_position
+  ) {
+    console.log('em');
+    return res.status(400).json('Please provide all fields');
+  }
+  try {
+    console.log('k');
+    const result = await knex('warehouses').insert(req.body);
+    console.log(result);
+    const newWarehouseId = result[0];
+    const createdWarehouse = await knex('warehouses').where({
+      id: newWarehouseId,
+    });
+    res.status(201).json(createdWarehouse);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: `Unable to create new warehouse: ${error}`,
+    });
+  }
+};
+
+const updateWarehouse = async (req, res) => {
+  if (
+    !req.body.warehouse_name ||
+    !req.body.address ||
+    !req.body.city ||
+    !req.body.country ||
+    !req.body.contact_name ||
+    !req.body.contact_phone ||
+    !req.body.contact_email ||
+    !req.body.contact_position
+  ) {
+    return res.status(400).json('Please provide all fields');
+  }
+
+  try {
+    const warehouseUpdated = await knex('warehouses')
+      .where({ id: req.params.id })
+      .update(req.body);
+    if (warehouseUpdated === 0) {
+      return res
+        .status(400)
+        .json({ message: `Warwhouse with Id ${req.params.id} not found` });
+    }
+
+    const updatedWarehouse = await knex('warehouses').where({
+      id: req.params.id,
+    });
+    res.json(updatedWarehouse[0]);
+  } catch (error) {
+    res.status(500).json({
+      message: `Unable to update warehouse with ID ${req.params.id}: ${error}`,
+    });
+  }
+};
 
 module.exports = {
   getAllWarehouses,
   getWareHouseDetailById,
   getInventoriesForWarehouse,
-  addNewWarehouse
+  addNewWarehouse,
+  updateWarehouse,
 };
